@@ -1,5 +1,0 @@
-package com.mindfire.apigateway;
-
-public class RateLimitExceptionHandler {
-
-}

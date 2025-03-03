@@ -1,7 +1,0 @@
-package com.mindfire.performancereviewservice.service;
-
-public interface FeedbackService {
-
-    FeedbackResponse addFeedback(FeedbackRequest feedbackRequest);
-
-}
