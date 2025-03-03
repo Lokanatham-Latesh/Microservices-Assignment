@@ -1,5 +1,0 @@
-# Ignore .metadata folder (IDE-specific settings)
-.metadata/
-
-# Ignore RemoteSystemsTempFiles folder (remote system temporary files)
-RemoteSystemsTempFiles/

@@ -1,0 +1,6 @@
+package com.mindfire.performancereviewservice.entity;
+
+
+public class Feedback {
+
+}

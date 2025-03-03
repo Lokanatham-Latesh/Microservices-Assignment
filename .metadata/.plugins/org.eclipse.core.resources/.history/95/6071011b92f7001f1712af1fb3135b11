@@ -1,0 +1,35 @@
+package com.mindfire.apigateway;
+
+import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
+
+import java.nio.charset.StandardCharsets;
+
+@Configuration
+@Order(-2) // Ensures it runs before default handlers
+public class RateLimitExceptionHandler implements ErrorWebExceptionHandler {
+
+    @Override
+    public Mono<Void> handle(ServerWebExchange exchange, Throwable ex) {
+        // Check if the exception is caused by rate limiting
+        if (ex instanceof ResponseStatusException && ((ResponseStatusException) ex).getStatusCode() == HttpStatus.TOO_MANY_REQUESTS) {
+            exchange.getResponse().setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
+            exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
+
+            String errorMessage = "{\"error\": \"Too many requests, please try again later.\"}";
+            byte[] bytes = errorMessage.getBytes(StandardCharsets.UTF_8);
+
+            return exchange.getResponse().writeWith(Mono.just(exchange.getResponse()
+                    .bufferFactory()
+                    .wrap(bytes)));
+        }
+
+        return Mono.error(ex);
+    }
+}

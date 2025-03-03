@@ -1,0 +1,9 @@
+package com.mindfire.performancereviewservice.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.mindfire.performancereviewservice.entity.Feedback;
+
+public interface FeedbackRepository extends JpaRepository<Feedback, Long>{
+
+}
