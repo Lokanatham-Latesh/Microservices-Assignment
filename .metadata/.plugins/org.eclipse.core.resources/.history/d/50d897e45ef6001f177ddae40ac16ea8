@@ -1,8 +1,0 @@
-package com.mindfire.performancereviewservice.validator;
-
-@Constraint(validatedBy = RatingValidator.class)
-@Target({ElementType.FIELD, ElementType.PARAMETER})
-@Retention(RetentionPolicy.RUNTIME)
-public @interface ValidRating {
-    String message() default "Invalid rating. Allowed values: SLOW, AVERAGE, FAST, EXCEPTIONAL.";
-}

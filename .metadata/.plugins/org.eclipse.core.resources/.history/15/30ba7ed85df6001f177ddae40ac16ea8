@@ -1,5 +1,0 @@
-package com.mindfire.performancereviewservice.validator;
-
-public interface ValidRating {
-
-}

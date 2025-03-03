@@ -1,5 +1,0 @@
-package com.mindfire.performancereviewservice.repository;
-
-public interface FeedbackRepository {
-
-}
