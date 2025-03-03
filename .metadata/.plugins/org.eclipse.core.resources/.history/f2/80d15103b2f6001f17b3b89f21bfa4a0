@@ -1,0 +1,16 @@
+package com.mindfire.performancereviewservice.repository;
+
+import com.mindfire.performancereviewservice.entity.Feedback;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+
+// Repository to interact with the Feedback entity
+public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
+    List<Feedback> findByEmployeeId(Long employeeId);
+
+    Feedback findTopByEmployeeIdOrderByFeedbackIdDesc(Long employeeId);
+
+    List<Feedback> findByEmployeeIdIn(List<Long> employeeIds);
+
+    boolean existsByEmployeeId(Long employeeId);
+}

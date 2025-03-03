@@ -1,0 +1,29 @@
+package com.employee.client;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.shared.request.FeedbackRequest;
+import com.shared.response.FeedbackResponse;
+
+import java.util.List;
+
+
+@FeignClient(name = "PERFORMANCE-REVIEW-SERVICE", path = "/feedbacks")
+public interface FeedbackClient {
+
+    @PostMapping
+    FeedbackResponse addFeedback(@RequestBody FeedbackRequest feedbackRequest);
+
+    @GetMapping("/{employeeId}")
+    List<FeedbackResponse> getFeedbackByEmployeeId(@PathVariable Long employeeId);
+
+    @GetMapping("/{employeeId}/latest")
+    FeedbackResponse getLatestFeedbackByEmployeeId(@PathVariable Long employeeId);
+
+    @GetMapping("/feedbacks")
+    List<FeedbackResponse> getFeedbacksForEmployeeList(@RequestBody List<Long> employeeIds);
+}

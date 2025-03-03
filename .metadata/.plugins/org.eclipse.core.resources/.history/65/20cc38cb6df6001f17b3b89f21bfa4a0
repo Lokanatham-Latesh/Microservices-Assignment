@@ -1,0 +1,45 @@
+package com.mindfire.performancereviewservice.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.mindfire.performancereviewservice.request.FeedbackRequest;
+import com.mindfire.performancereviewservice.response.FeedbackResponse;
+import com.mindfire.performancereviewservice.service.FeedbackService;
+
+import jakarta.validation.Valid;
+
+@RestController
+@RequestMapping("/feedbacks")
+public class FeedbackController {
+
+    @Autowired
+    private FeedbackService feedbackService;
+
+    @PostMapping
+    public ResponseEntity<FeedbackResponse> addFeedback(@Valid @RequestBody FeedbackRequest feedbackRequest) {
+        FeedbackResponse feedbackResponse = feedbackService.addFeedback(feedbackRequest);
+        return ResponseEntity.ok(feedbackResponse);
+    }
+    
+    
+    @GetMapping("/employee/{employeeId}")
+    public ResponseEntity<List<FeedbackResponse>> getFeedbackByEmployeeId(@PathVariable Long employeeId) {
+        List<FeedbackResponse> feedbackResponses = feedbackService.getFeedbackByEmployeeId(employeeId);
+        return ResponseEntity.ok(feedbackResponses);
+    }
+    
+    @GetMapping("/employee/{employeeId}/latest")
+    public ResponseEntity<FeedbackResponse> getlatestFeedbackByEmployeeId(@PathVariable Long employeeId) {
+        FeedbackResponse feedbackResponse = feedbackService.getSingleFeedbackByEmployeeId(employeeId);
+        return ResponseEntity.ok(feedbackResponse);
+    }
+}

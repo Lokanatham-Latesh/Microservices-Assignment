@@ -1,0 +1,7 @@
+com\shared\App.class
+com\shared\validator\ValidRating.class
+com\shared\validator\RatingValidator.class
+com\shared\request\FeedbackRequest.class
+com\shared\enums\Rating.class
+com\shared\validator\ValidatorConstant.class
+com\shared\response\FeedbackResponse.class

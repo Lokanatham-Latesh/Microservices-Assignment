@@ -1,0 +1,116 @@
+package com.mindfire.performancereviewservice.service.imp;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.mindfire.performancereviewservice.entity.Feedback;
+import com.mindfire.performancereviewservice.exception.FeedbackException;
+import com.mindfire.performancereviewservice.repository.FeedbackRepository;
+
+import com.mindfire.performancereviewservice.service.FeedbackService;
+import com.shared.enums.Rating;
+import com.shared.request.FeedbackRequest;
+import com.shared.response.FeedbackResponse;
+
+@Service
+public class FeedbackServiceImpl implements FeedbackService {
+
+	@Autowired
+	private FeedbackRepository feedbackRepository;
+
+	@Autowired
+	private ModelMapper modelMapper;
+
+	@Override
+	public FeedbackResponse addFeedback(FeedbackRequest feedbackRequest) {
+		try {
+			Feedback feedback = new Feedback();
+			feedback.setFeedback(feedbackRequest.getFeedback());
+			feedback.setRating(Rating.valueOf(feedbackRequest.getRating().toUpperCase()));
+			feedback.setEmployeeId(feedbackRequest.getEmployeeId());
+			Feedback savedFeedback = feedbackRepository.save(feedback);
+			return modelMapper.map(savedFeedback, FeedbackResponse.class);
+		} catch (Exception e) {
+			throw new FeedbackException("Error while adding feedback. Please try again later.");
+		}
+	}
+
+	@Override
+	public List<FeedbackResponse> getFeedbackByEmployeeId(Long employeeId) {
+
+		List<Feedback> feedbackList = feedbackRepository.findByEmployeeId(employeeId);
+
+		if (feedbackList.isEmpty()) {
+			throw new FeedbackException("No feedback found for employee with ID: " + employeeId);
+		}
+
+		return modelMapper.map(feedbackList, new TypeToken<List<FeedbackResponse>>() {
+		}.getType());
+	}
+
+	@Override
+	public FeedbackResponse getLatestFeedbackByEmployeeId(Long employeeId) {
+		Feedback latestFeedback = feedbackRepository.findLatestFeedbackByEmployeeId(employeeId);
+
+		if (latestFeedback == null) {
+			throw new FeedbackException("No feedback found for employee with ID: " + employeeId);
+		}
+
+		return modelMapper.map(latestFeedback, FeedbackResponse.class);
+	}
+
+	@Override
+	public List<FeedbackResponse> getFeedbacksForEmployeeList(List<Long> employeeIds) {
+		if (employeeIds.isEmpty()) {
+			throw new FeedbackException("Employee ID list cannot be empty");
+		}
+
+		try {
+			List<Long> missingFeedbackIds = checkEmployeeIdsExistInFeedback(employeeIds);
+
+			if (!missingFeedbackIds.isEmpty()) {
+				String errorMessage = "No feedback found for employee IDs: " + missingFeedbackIds;
+				throw new FeedbackException(errorMessage);
+			}
+
+			List<Feedback> feedbackList = feedbackRepository.findByEmployeeIdIn(employeeIds);
+
+			if (feedbackList.isEmpty()) {
+				throw new FeedbackException("No feedbacks found for the given employee IDs");
+			}
+
+			return modelMapper.map(feedbackList, new TypeToken<List<FeedbackResponse>>() {
+			}.getType());
+
+		} catch (FeedbackException ex) {
+			throw new FeedbackException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new FeedbackException(
+					"Unexpected error while retrieving feedbacks for employees. Please try again later.");
+		}
+	}
+
+	/**
+	 * Private method to check whether each employee ID exists in the feedback
+	 * repository
+	 * 
+	 * @param employeeIds List of employee IDs
+	 * @return List of employee IDs that do not have feedback
+	 */
+	private List<Long> checkEmployeeIdsExistInFeedback(List<Long> employeeIds) {
+		// Fetch the employee IDs that have feedback entries in the repository
+		List<Long> employeeIdsInFeedback = feedbackRepository.findDistinctEmployeeIds(employeeIds);
+
+		// Find missing employee IDs
+		List<Long> missingEmployeeIds = employeeIds.stream()
+				.filter(employeeId -> !employeeIdsInFeedback.contains(employeeId)).collect(Collectors.toList());
+
+		return missingEmployeeIds;
+	}
+
+}

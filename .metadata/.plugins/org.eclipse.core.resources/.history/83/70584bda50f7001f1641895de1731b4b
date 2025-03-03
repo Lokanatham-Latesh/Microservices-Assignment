@@ -1,0 +1,49 @@
+package com.employee.service;
+
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+
+import com.employee.request.EmployeeDepartmentRequest;
+import com.employee.request.EmployeeRequest;
+import com.employee.response.EmployeeResponse;
+import com.employee.response.EmployeeWithDepartmentResponse;
+import com.shared.request.FeedbackRequest;
+import com.shared.response.FeedbackResponse;
+
+public interface EmployeeService {
+	EmployeeResponse addEmployee(EmployeeRequest employeeRequest);
+
+	EmployeeResponse getEmployeeById(Long id);
+
+	Boolean deleteEmployee(Long id);
+
+	EmployeeResponse updateEmployee(Long employeeId, EmployeeRequest employeeRequest);
+
+	String AddEmployeeToDepartments(EmployeeDepartmentRequest employeeDepartmentRequest);
+
+	List<EmployeeResponse> getAllEmployees();
+
+	List<EmployeeResponse> getEmployeesWithSalaryGreaterThan(Double salary);
+
+	List<EmployeeResponse> getRecentJoiners();
+
+	public EmployeeWithDepartmentResponse getEmployeeWithDepartments(Long id);
+
+	List<EmployeeResponse> getTop3HighestPaidEmployees();
+
+	public Page<EmployeeResponse> getPaginatedEmployees(int page, int size);
+
+	List<EmployeeWithDepartmentResponse> getEmployeesWithDepartments();
+
+	String transferEmployeesBetweenDepartments(Long fromDepartmentId, Long toDepartmentId, Long employeeId);
+
+	String bulkSalaryUpdate(double percentage);
+
+	public FeedbackResponse addFeedback(FeedbackRequest feedbackRequest);
+
+	public List<FeedbackResponse> getEmployeeFeedback(Long employeeId);
+	 FeedbackResponse getLatestFeedbackByEmployeeId(Long employeeId) ;
+
+
+}

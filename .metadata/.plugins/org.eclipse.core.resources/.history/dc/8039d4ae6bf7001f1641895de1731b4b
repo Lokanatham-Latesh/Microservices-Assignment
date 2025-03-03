@@ -1,0 +1,5 @@
+package com.mindfire.apigateway.config;
+
+public class GateWayConfig {
+
+}
