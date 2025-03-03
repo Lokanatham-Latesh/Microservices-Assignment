@@ -1,0 +1,5 @@
+package com.mindfire.performancereviewservice.request;
+
+public class FeedbackRequest {
+
+}

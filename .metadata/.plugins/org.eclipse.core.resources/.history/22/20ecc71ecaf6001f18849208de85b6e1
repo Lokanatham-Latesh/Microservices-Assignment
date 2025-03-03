@@ -1,0 +1,53 @@
+package com.mindfire.performancereviewservice.service.imp;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.mindfire.performancereviewservice.entity.Feedback;
+import com.mindfire.performancereviewservice.exception.FeedbackException;
+import com.mindfire.performancereviewservice.repository.FeedbackRepository;
+
+import com.mindfire.performancereviewservice.service.FeedbackService;
+import com.shared.enums.Rating;
+import com.shared.request.FeedbackRequest;
+import com.shared.response.FeedbackResponse;
+
+@Service
+public class FeedbackServiceImpl implements FeedbackService {
+
+    @Autowired
+    private FeedbackRepository feedbackRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Override
+    public FeedbackResponse addFeedback(FeedbackRequest feedbackRequest) {
+        Employee employee = findEmployeeById(feedbackRequest.getEmployeeId());
+
+        try {
+            return feedbackClient.addFeedback(feedbackRequest); // calling the Feedback service
+        } catch (FeedbackException ex) {
+            // Propagate FeedbackException and make sure it reaches EmployeeService with proper message
+            throw new EmployeeSystemException.BadRequestException(ex.getMessage());
+        } catch (FeignException ex) {
+            // Other errors related to external services like FeignClient errors
+            String errorMessage = extractErrorMessage(ex);
+            throw new EmployeeSystemException.InternalServerErrorException(
+                "Error in Feedback Service: " + errorMessage
+            );
+        } catch (Exception ex) {
+            // Catch any other unexpected errors
+            throw new EmployeeSystemException.InternalServerErrorException(
+                "Unexpected error while adding feedback: " + ex.getMessage()
+            );
+        }
+    }
+
+
+
+
+   
+    
+}

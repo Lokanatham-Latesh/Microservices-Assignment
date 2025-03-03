@@ -1,0 +1,5 @@
+package com.mindfire.performancereviewservice.enums;
+
+public enum Rating {
+
+}
