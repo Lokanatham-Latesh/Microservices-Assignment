@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mindfire.performancereviewservice.entity.Feedback;
+import com.mindfire.performancereviewservice.enums.Rating;
 import com.mindfire.performancereviewservice.exception.FeedbackException;
 import com.mindfire.performancereviewservice.repository.FeedbackRepository;
-
+import com.mindfire.performancereviewservice.request.FeedbackRequest;
+import com.mindfire.performancereviewservice.response.FeedbackResponse;
 import com.mindfire.performancereviewservice.service.FeedbackService;
-import com.shared.enums.Rating;
-import com.shared.request.FeedbackRequest;
-import com.shared.response.FeedbackResponse;
+
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService {

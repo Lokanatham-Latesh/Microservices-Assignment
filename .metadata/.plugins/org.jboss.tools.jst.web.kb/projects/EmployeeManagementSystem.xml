@@ -212,12 +212,12 @@
  <validation>
   <core validator-id="jboss.cdi.core"/>
   <el>
-   <linked-el length="23" name="%0" offset="5760" path="%1"/>
-   <linked-el length="23" name="%2" offset="5760" path="%1"/>
-   <linked-el length="23" name="%3" offset="5760" path="%1"/>
-   <linked-el length="26" name="%4" offset="5110" path="%1"/>
-   <linked-el length="26" name="%5" offset="5110" path="%1"/>
-   <linked-el length="26" name="%6" offset="5110" path="%1"/>
+   <linked-el length="23" name="%0" offset="5733" path="%1"/>
+   <linked-el length="23" name="%2" offset="5733" path="%1"/>
+   <linked-el length="23" name="%3" offset="5733" path="%1"/>
+   <linked-el length="26" name="%4" offset="5083" path="%1"/>
+   <linked-el length="26" name="%5" offset="5083" path="%1"/>
+   <linked-el length="26" name="%6" offset="5083" path="%1"/>
   </el>
  </validation>
  <aliases>

@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mindfire.performancereviewservice.request.FeedbackRequest;
+import com.mindfire.performancereviewservice.response.FeedbackResponse;
 import com.mindfire.performancereviewservice.service.FeedbackService;
-import com.shared.request.FeedbackRequest;
-import com.shared.response.FeedbackResponse;
+
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;

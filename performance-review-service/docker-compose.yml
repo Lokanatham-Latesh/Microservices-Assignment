@@ -1,0 +1,119 @@
+version: '3.7'
+
+services:
+  mysql:
+    container_name: mysqlcontainer
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mindfire
+    ports:
+      - "3307:3306"
+    volumes:  
+      - mysql_data:/var/lib/mysql  
+    networks:
+      - sql-web-net
+    restart: always
+
+  config-server:
+    image: lokanthamlatesh/config-server
+    container_name: config-server
+    ports:
+      - 8888:8888
+    depends_on:
+      - service-registry
+    networks:
+      - microservice-network
+      - sql-web-net
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  service-registry:
+    image: lokanthamlatesh/service-registry
+    container_name: serviceregistry
+    ports:
+      - "8761:8761"
+    depends_on:
+      - zipkin
+      - mysql
+    networks:
+      - microservice-network
+      - sql-web-net
+  
+  employeeService:
+    image: lokanthamlatesh/employee-service
+    container_name: employee-container
+    ports:
+      - 8082:8082
+    depends_on:
+      - service-registry
+      - config-server
+    networks:
+      - microservice-network
+      - sql-web-net
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    restart: on-failure
+
+  performanceService:
+    image: lokanthamlatesh/perfomance-service
+    container_name: performance-container
+    ports:
+      - 8083:8083
+    depends_on:
+      - service-registry
+      - config-server
+    networks:
+      - microservice-network
+      - sql-web-net
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  frontend:
+    image: lokanthamlatesh/employee-management-frontend:1.0
+    container_name: frontend-container
+    ports:
+      - "5173:5173"
+    depends_on:
+      - employeeService
+    networks:
+      - microservice-network
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - 9411:9411
+    networks:
+      - microservice-network
+      - sql-web-net
+
+  api-gateway:
+    image: lokanthamlatesh/api-gateway
+    ports:
+      - 8765:8080
+    depends_on:
+      - service-registry
+      - redis
+    networks:
+      - microservice-network
+      - sql-web-net
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    networks:
+      - microservice-network
+      - sql-web-net
+
+networks:
+  microservice-network:
+    driver: bridge
+  sql-web-net:
+    driver: bridge
+
+volumes:
+  mysql_data:

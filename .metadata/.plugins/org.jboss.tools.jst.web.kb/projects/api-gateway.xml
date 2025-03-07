@@ -72,8 +72,8 @@
   <path value="C:/Users/lokanathaml/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar"/>
   <path value="C:/Users/lokanathaml/.m2/repository/io/netty/netty-codec-socks/4.1.118.Final/netty-codec-socks-4.1.118.Final.jar"/>
   <path value="C:/Users/lokanathaml/.m2/repository/com/netflix/eureka/eureka-client/2.0.4/eureka-client-2.0.4.jar"/>
-  <path value="C:/Users/lokanathaml/.m2/repository/io/netty/netty-codec/4.1.118.Final/netty-codec-4.1.118.Final.jar"/>
   <path value="C:/Users/lokanathaml/.m2/repository/org/springframework/cloud/spring-cloud-config-client/4.2.0/spring-cloud-config-client-4.2.0.jar"/>
+  <path value="C:/Users/lokanathaml/.m2/repository/io/netty/netty-codec/4.1.118.Final/netty-codec-4.1.118.Final.jar"/>
   <path value="C:/Users/lokanathaml/.m2/repository/io/projectreactor/reactor-core/3.7.3/reactor-core-3.7.3.jar"/>
   <path value="C:/Users/lokanathaml/.m2/repository/org/springframework/spring-aop/6.2.3/spring-aop-6.2.3.jar"/>
   <path value="C:/Users/lokanathaml/.m2/repository/io/netty/netty-resolver/4.1.118.Final/netty-resolver-4.1.118.Final.jar"/>
@@ -104,8 +104,8 @@
   <path value="C:/Users/lokanathaml/.m2/repository/org/reactivestreams/reactive-streams/1.0.4/reactive-streams-1.0.4.jar"/>
   <path value="C:/Users/lokanathaml/.m2/repository/com/thoughtworks/xstream/xstream/1.4.20/xstream-1.4.20.jar"/>
   <path value="C:/Users/lokanathaml/.m2/repository/org/springframework/cloud/spring-cloud-commons/4.2.0/spring-cloud-commons-4.2.0.jar"/>
-  <path value="C:/Users/lokanathaml/.m2/repository/org/springframework/spring-test/6.2.3/spring-test-6.2.3.jar"/>
   <path value="C:/Users/lokanathaml/.m2/repository/org/springframework/spring-beans/6.2.3/spring-beans-6.2.3.jar"/>
+  <path value="C:/Users/lokanathaml/.m2/repository/org/springframework/spring-test/6.2.3/spring-test-6.2.3.jar"/>
   <path value="C:/Users/lokanathaml/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.3/spring-boot-starter-json-3.4.3.jar"/>
   <path value="C:/Users/lokanathaml/.m2/repository/io/netty/netty-transport-native-unix-common/4.1.118.Final/netty-transport-native-unix-common-4.1.118.Final.jar"/>
   <path value="C:/Users/lokanathaml/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar"/>
@@ -166,7 +166,6 @@
   <path value="C:/Users/lokanathaml/.m2/repository/org/springframework/boot/spring-boot-starter-reactor-netty/3.4.3/spring-boot-starter-reactor-netty-3.4.3.jar"/>
  </paths>
  <validation>
-  <core validator-id="jboss.cdi.core"/>
   <el>
    <linked-el length="23" name="%0" offset="2875" path="%1"/>
    <linked-el length="23" name="%2" offset="2875" path="%1"/>

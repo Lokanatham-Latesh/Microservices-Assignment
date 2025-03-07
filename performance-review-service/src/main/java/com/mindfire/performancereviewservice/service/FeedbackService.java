@@ -2,8 +2,12 @@ package com.mindfire.performancereviewservice.service;
 
 import java.util.List;
 
-import com.shared.request.FeedbackRequest;
-import com.shared.response.FeedbackResponse;
+import com.mindfire.performancereviewservice.request.FeedbackRequest;
+import com.mindfire.performancereviewservice.response.FeedbackResponse;
+
+
+
+
 
 public interface FeedbackService {
 

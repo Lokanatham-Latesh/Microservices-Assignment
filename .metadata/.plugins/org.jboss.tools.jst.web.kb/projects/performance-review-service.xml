@@ -70,11 +70,11 @@
    <libraries>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-spring-webmvc-6.2.3.jar/meta-inf/spring-form.tld" project="performance-review-service"/>
+      path="FileSystems/lib-spring-webmvc-6.2.3.jar/meta-inf/spring-form.tld" project="EmployeeManagementSystem"/>
     </library>
     <library class="tld">
      <id class="model-object"
-      path="FileSystems/lib-spring-webmvc-6.2.3.jar/meta-inf/spring.tld" project="performance-review-service"/>
+      path="FileSystems/lib-spring-webmvc-6.2.3.jar/meta-inf/spring.tld" project="EmployeeManagementSystem"/>
     </library>
    </libraries>
   </path>
@@ -177,9 +177,18 @@
  </paths>
  <validation>
   <core validator-id="jboss.cdi.core"/>
-  <el/>
+  <el>
+   <linked-el length="23" name="%0" offset="3373" path="%1"/>
+   <linked-el length="23" name="%2" offset="3373" path="%1"/>
+   <linked-el length="23" name="%3" offset="3373" path="%1"/>
+  </el>
  </validation>
- <aliases/>
+ <aliases>
+  <alias path="spring" value="%0"/>
+  <alias path="/performance-review-service/pom.xml" value="%1"/>
+  <alias path="cloud" value="%2"/>
+  <alias path="cloud.version" value="%3"/>
+ </aliases>
  <includes/>
  <uris/>
 </kb-project>

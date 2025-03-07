@@ -1,7 +1,10 @@
 package com.mindfire.performancereviewservice.entity;
 
 
-import com.shared.enums.Rating;
+
+
+
+import com.mindfire.performancereviewservice.enums.Rating;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

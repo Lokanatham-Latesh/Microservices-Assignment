@@ -22,3 +22,4 @@ org.eclipse.ui.workbench.INACTIVE_TAB_OUTLINE_COLOR=59,64,66
 org.eclipse.ui.workbench.INACTIVE_TAB_TEXT_COLOR=187,187,187
 org.eclipse.ui.workbench.INACTIVE_UNSELECTED_TABS_COLOR_END=70,70,73
 org.eclipse.ui.workbench.INACTIVE_UNSELECTED_TABS_COLOR_START=81,86,88
+overridepresentation=true

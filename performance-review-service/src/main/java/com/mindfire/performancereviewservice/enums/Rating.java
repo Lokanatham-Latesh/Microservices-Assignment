@@ -1,0 +1,13 @@
+package com.mindfire.performancereviewservice.enums;
+
+
+public enum Rating {
+
+	SLOW,
+    AVERAGE,
+    FAST,
+    EXCEPTIONAL
+    
+    
+    
+}
